@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const BirdPicture = (props) => {
-  return <img class="image-bird" src={props.imageUrl}></img>;
+  return <img class="image-bird" src={props.imageUrl} alt="bird"></img>;
 };
 
 const BirdName = (props) => {
