@@ -11,8 +11,8 @@ export default class Answers extends React.Component {
   render() {
     return (
       <>
-        <div className="container">
-              <ul className="answer-list row">{this.props.children}</ul>
+        <div className="col-sm6">
+              <ul className="answer-list bg-dark">{this.props.children}</ul>
         </div>
       </>
     );

@@ -8,7 +8,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 const BirdPicture = (props) => {
-  return <img class="image-bird" src={props.imageUrl} alt="bird"></img>;
+  return <img className="image-bird" src={props.imageUrl} alt="bird"></img>;
 };
 
 const BirdName = (props) => {
@@ -18,7 +18,7 @@ const BirdName = (props) => {
 export default class AudioPlayer extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    //console.log(props);
     this.state = {};
   }
 
@@ -26,7 +26,7 @@ export default class AudioPlayer extends React.Component {
     return (
       <>
         <Container>
-          <Row>
+          <Row className='bg-dark audio'>
             <Col>              
               <BirdPicture imageUrl={this.props.imageUrl} />              
             </Col>

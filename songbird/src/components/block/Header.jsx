@@ -5,7 +5,23 @@ import Nav from 'react-bootstrap/Nav';
 import '../../App.scss';
 
 export default class Header extends React.Component {
+  constructor(props) {
+    super(props);
+  }
 
+  typeArray = ['Разминка', 'Воробьиные', 'Лестные птицы', 'Певчие птицы', 'Хищьные птицы', 'Морские птицы'];
+
+  renderLink(questionNumber) {
+    return (
+    this.typeArray.map(
+      (element, index) => {
+        if (questionNumber===index) {
+          return <Nav.Link active href={"#answer" + index}>{element}</Nav.Link>
+        }
+        return <Nav.Link  href={"#answer" + index}>{element}</Nav.Link>
+      }      
+    ))
+  }
 
   render() {
     return (
@@ -13,30 +29,14 @@ export default class Header extends React.Component {
         <Navbar bg="dark" variant="dark">
           <Navbar.Brand href="#home">SongBird</Navbar.Brand>
           <Nav className="mr-auto">
-            <Nav.Link href="#warmup">Разминка</Nav.Link>
-            <Nav.Link href="#passerines">Воробьиные</Nav.Link>
-            <Nav.Link href="#forestbirds">Лестные птицы</Nav.Link>
-            <Nav.Link href="#songbirds">Певчие птицы</Nav.Link>
-            <Nav.Link href="#hanterbirds">Хищьные птицы</Nav.Link>
-            <Nav.Link href="#seabirds">Морские птицы</Nav.Link>
+            {this.renderLink(this.props.questionNumber)}
           </Nav>
           <Navbar.Text>
-            Score: 11
+            <label>
+              Score: {this.props.score}
+            </label>
           </Navbar.Text>          
         </Navbar>
-        
-        <nav>
-          <h1>SongBird</h1>
-          <p></p>
-          <ul>
-            <li><a>Разминка</a></li>
-            <li><a>Воробьиные</a></li>
-            <li><a>Лестные птицы</a></li>
-            <li><a>Певчие птицы</a></li>
-            <li><a>Хищьные птицы</a></li>
-            <li><a>Морские птицы</a></li>
-          </ul>
-        </nav>
       </>
     )
   }

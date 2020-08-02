@@ -14,9 +14,9 @@ export default class BirdInfo extends React.Component {
   noBirdClicked() {
     return (
       <>
-        <div className="container">
+        <div className="container bg-dark">
           <div className="row">
-            <div className="col-sm">Выберите вариант ответа</div>
+            <div className="col">Выберите вариант ответа</div>
           </div>
         </div>
       </>
@@ -26,21 +26,21 @@ export default class BirdInfo extends React.Component {
   birdClicked(id) {
     return (
       <>
-        <div className="container">
-          <div className="row">
+        <div className="col-sm6 bg-dark">
+          <div className="col-sm12">
             <div className="col-sm6">
               <div className="col-sm12">
-              <BirdPicture imageUrl={this.props.info[id].image} />
+              <BirdPicture imageUrl={this.props.info[id-1].image} />
               </div>
             </div>
             <div className="col-sm6">
-              <div className="row">{this.props.info[id].name}</div>
-              <div className="row">{this.props.info[id].species}</div>
-              <div className="row">audio</div>
+              <div className="col-sm12">{this.props.info[id-1].name}</div>
+              <div className="col-sm12">{this.props.info[id-1].species}</div>
+              <div className="col-sm12">audio</div>
             </div>
           </div>
-          <div className="row">
-            <div className="col-sm">{this.props.info[id].description}</div>
+          <div className="col-sm12">
+            <div className="col-sm">{this.props.info[id-1].description}</div>
           </div>
         </div>
       </>
@@ -48,7 +48,7 @@ export default class BirdInfo extends React.Component {
   }
 
   render() {  
-    if (this.props.lastSelectAnswer === undefined) {
+    if (this.props.lastSelectAnswer === false) {
       return this.noBirdClicked();
     }  
     return this.birdClicked(this.props.lastSelectAnswer);
