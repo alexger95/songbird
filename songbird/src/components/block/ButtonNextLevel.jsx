@@ -5,14 +5,13 @@ import '../../App.scss';
 
 export default class ButtonNextLevel extends React.Component {
     constructor(props) {
-        super(props);
-        
+        super(props);        
       }
 
     render() {
         return(
             <>
-                <Button disabled={this.props.buttonDisable}>ButtonNextLevel</Button>
+                <Button className="next-btn" onClick={() => this.props.nextLevel()} disabled={this.props.buttonDisable}>Дальше</Button>
             </>
         )
     }

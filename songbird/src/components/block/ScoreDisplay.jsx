@@ -8,7 +8,8 @@ const ScoreDisplay = (props) => {
     buttonLabel,
     className,
     modal,
-    score
+    score,
+    newGame,
   } = props;
 
   return (
@@ -22,7 +23,7 @@ const ScoreDisplay = (props) => {
           <Button variant="secondary" onClick={toggle}>
             Закрыть
           </Button>
-          <Button variant="primary" onClick={toggle}>
+          <Button variant="primary" onClick={newGame}>
             Снова
           </Button>
         </Modal.Footer>

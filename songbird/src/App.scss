@@ -1,13 +1,13 @@
 @import "~bootstrap/scss/bootstrap";
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 html {
-
 }
 
 .App {
   text-align: center;
+  background-color: #222;
 }
 
 .App-logo {
@@ -46,21 +46,49 @@ html {
 }
 
 .image-bird {
-  height: auto;
-  width: 100%;
-  max-width: 200px;
+  height: 155px;
+  width: 200px;
   border-radius: 10px;
   margin: 5px;
 }
 
 ul {
   list-style: none;
+  padding-inline-start: 0;
+}
+
+.react-audio-player {
+  margin: 10px 0px 8px 0;
+    width: 100%;
+    min-width: 100px;
+}
+
+.page-item {
+  
+  margin: 2px;
+  border-radius: 2px;
+}
+
+.pagination {
+  justify-content: space-around;;
+    flex-wrap: wrap;
+    padding: 0;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.border-block {
+  border: 1px solid black;
+  border-radius: 8px;
 }
 
 .answer-list li {
-  border: 2px solid black;
-  border-radius: 8px;
   margin: 2px;
+}
+
+.answer-list span {
+  font-size: 1.5rem;
 }
 
 .grey {
@@ -75,19 +103,34 @@ ul {
   color: green;
 }
 
-.answer-list {
-  margin-top: 10px;
-  border: 2px solid black;
-  border-radius: 8px;
-
-}
-
 body {
-  background-color: #8F97A0;
-  color: #8F97A0;
-  font-family: 'Roboto', sans-serif;
+  background-color: #f1f1ef;
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
 }
 
-.audio { 
+.audio {
   margin: 5px;
 }
+
+.bg-dark-strong {
+  background-color: #34421e !important;
+}
+
+.bg-dark-light {
+  background-color: #5f6d46 !important;
+}
+
+.next-btn {
+  background-color: #34421e !important;
+  margin: 3px;
+}
+
+.modal-content {
+  color: black;
+}
+
+.video-bg {
+  background-color: #222;
+}
+

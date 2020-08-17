@@ -8,6 +8,7 @@ import Answers from "../block/Answers";
 import BirdInfo from "../block/BirdInfo";
 import ButtonNextLevel from "../block/ButtonNextLevel";
 import ScoreDisplay from "../block/ScoreDisplay";
+import BackgroundVideo from '../block/BackgroundVideo';
 
 import birdsData from "../assets/birdsData";
 
@@ -16,12 +17,13 @@ export default class MainPage extends React.Component {
     super(props);
     this.state = {
       questionNumber: 0,
-      trueAnswerNumber: 2,
+      trueAnswerNumber: this.randomAnswer() - 1,
       answers: [0, 0, 0, 0, 0, 0],
       lastSelectAnswer: false,
       score: 0,
       falseAnswers: 0,
       modalToggle: false,
+      nextLevelBtn: true,
     };
   }
 
@@ -37,10 +39,10 @@ export default class MainPage extends React.Component {
 
   renderAnswersList(questionNumber) {
     return birdsData[questionNumber].map((answer, index) => {
-      //console.log(answer);
       return (
-        <div className="col-sm12">
+        <div key={index.toString()} className="col-sm12">
           <li
+            key={index.toString()}
             id={index + 1}
             onClick={(event) => this.answerClickReducer(event.currentTarget.id)}
           >
@@ -53,7 +55,6 @@ export default class MainPage extends React.Component {
   }
 
   returnAudioUrl(questionNumber, audioNumber) {
-    //console.log(birdsData, questionNumber, audioNumber);
     return birdsData[questionNumber][audioNumber].audio;
   }
 
@@ -106,23 +107,30 @@ export default class MainPage extends React.Component {
   }
 
   trueAnswerReducer(clickedId) {
-    console.log("true");
+    if(this.state.nextLevelBtn) {
     this.setState({
-      questionNumber: this.state.questionNumber + 1,
-      trueAnswerNumber: this.randomAnswer() - 1,
+      nextLevelBtn: !this.state.nextLevelBtn,
       lastSelectAnswer: +clickedId,
       score: this.state.score + (5 - this.state.falseAnswers),
-      falseAnswers: 0,
     });
     this.colorList(+clickedId, true);
+    this.godAudioPlay();
+  } else {
+    this.setState({lastSelectAnswer: +clickedId,});
   }
+}
 
   falseAnserReducer(clickedId) {
-    console.log("true");
-    this.setState({
-      falseAnswers: this.state.falseAnswers + 1,
-    });
-    this.colorList(+clickedId, false);
+    if(this.state.nextLevelBtn) {
+      this.setState({
+        falseAnswers: this.state.falseAnswers + 1,
+        lastSelectAnswer: +clickedId,
+      });
+      this.colorList(+clickedId, false);
+      this.failAudioPlay();
+    } else {
+      this.setState({lastSelectAnswer: +clickedId,})
+    }    
   }
 
   modalToggle() {
@@ -133,15 +141,53 @@ export default class MainPage extends React.Component {
     this.modalToggle();
   }
 
+  godAudioPlay() {
+    let audio = new Audio('https://birds-quiz.netlify.app/static/media/win.a1e9e8b6.mp3');
+    audio.play();
+  }
+
+  failAudioPlay() {
+    let audio = new Audio('https://birds-quiz.netlify.app/static/media/error.165166d5.mp3');
+    audio.play();
+  }
+
+  nextLevel() {
+    this.setState({
+      nextLevelBtn: !this.state.nextLevelBtn,
+      questionNumber: this.state.questionNumber + 1,
+      trueAnswerNumber: this.randomAnswer() - 1,
+      falseAnswers: 0,
+      answers: [0, 0, 0, 0, 0, 0],
+      lastSelectAnswer: false,
+    })
+  }
+
+  newGame() {
+    this.setState({
+      questionNumber: 0,
+      trueAnswerNumber: this.randomAnswer(),
+      answers: [0, 0, 0, 0, 0, 0],
+      lastSelectAnswer: false,
+      score: 0,
+      falseAnswers: 0,
+      modalToggle: false,
+      nextLevelBtn: true,
+    })
+  }
+
   render() {
     return (
       <>
+      {window.screen.width > 960 ? <BackgroundVideo/> : null }
+           
+       <div className="cover">
        <ScoreDisplay 
         modal={this.state.modalToggle} 
         toggle={() => this.modalToggle()} 
         buttonLabel="modal" 
         className="modal"
         score={this.state.score}
+        newGame={() => this.newGame()}
       />
         <Header
           score={this.state.score}
@@ -158,17 +204,24 @@ export default class MainPage extends React.Component {
           )}
           name={this.returnName(
             this.state.questionNumber,
-            this.state.trueAnswerNumber
+            this.state.trueAnswerNumber,            
           )}
+          showAnswer={this.state.nextLevelBtn}
         />
         <div className="container">
+          <div className="row">
           <Answers>{this.renderAnswersList(this.state.questionNumber)}</Answers>
           <BirdInfo
             info={birdsData[this.state.questionNumber]}
             lastSelectAnswer={this.state.lastSelectAnswer}
+            getAudioUrl={this.returnAudioUrl}
           />
+          </div> 
+                   
         </div>
-        <ButtonNextLevel buttonDisable={true} />
+        <ButtonNextLevel nextLevel={() => this.nextLevel()} buttonDisable={this.state.nextLevelBtn} />
+       </div>
+      
       </>
     );
   }

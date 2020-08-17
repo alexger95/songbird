@@ -16,26 +16,33 @@ export default class Header extends React.Component {
     this.typeArray.map(
       (element, index) => {
         if (questionNumber===index) {
-          return <Nav.Link active href={"#answer" + index}>{element}</Nav.Link>
+          return <li className="page-item"><Nav.Link key={index + 1} active href={"#answer" + index}>{element}</Nav.Link></li>
         }
-        return <Nav.Link  href={"#answer" + index}>{element}</Nav.Link>
+        return <li className="page-item"><Nav.Link key={index + 1} href={"#answer" + index}>{element}</Nav.Link></li>
       }      
     ))
   }
 
   render() {
     return (
-      <>
-        <Navbar bg="dark" variant="dark">
-          <Navbar.Brand href="#home">SongBird</Navbar.Brand>
-          <Nav className="mr-auto">
-            {this.renderLink(this.props.questionNumber)}
-          </Nav>
+      <>      
+        <Navbar className="bg-dark-strong" variant="dark">
+        <div>
+        <Navbar.Brand href="#home">SongBird</Navbar.Brand>          
           <Navbar.Text>
             <label>
-              Score: {this.props.score}
+              Очки: {this.props.score}
             </label>
-          </Navbar.Text>          
+          </Navbar.Text>    
+        </div>
+          <div>
+          <Nav className="mr-auto">
+            <ul className="pagination">
+            {this.renderLink(this.props.questionNumber)}
+            </ul>            
+          </Nav> 
+          </div>
+               
         </Navbar>
       </>
     )
