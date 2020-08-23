@@ -15,6 +15,7 @@ import birdsData from "../assets/birdsData";
 export default class MainPage extends React.Component {
   constructor(props) {
     super(props);
+    this.setAudioPlayerRef = element => this.audioPlayerUnit = element
     this.state = {
       questionNumber: 0,
       trueAnswerNumber: this.randomAnswer() - 1,
@@ -25,6 +26,10 @@ export default class MainPage extends React.Component {
       modalToggle: false,
       nextLevelBtn: true,
     };
+  }
+
+  pauseSong() {
+    if (this.audioPlayerUnit) console.log("audplunit", this.audioPlayerUnit.audioEl.current.pause());
   }
 
   answerStyle(number) {
@@ -87,8 +92,7 @@ export default class MainPage extends React.Component {
 
   answerClickReducer(clickedId) {    
     if (this.state.questionNumber === 5) {
-      console.log("last raund");
-      
+      console.log("last raund");      
     }
     if (+clickedId === this.state.trueAnswerNumber + 1) {
       if (this.state.questionNumber === 5) {
@@ -96,7 +100,7 @@ export default class MainPage extends React.Component {
       score: this.state.score + (5 - this.state.falseAnswers),
     });
         this.displayStats();
-        return
+        
       }
       this.trueAnswerReducer(clickedId);
       return 'true answer commit'
@@ -114,6 +118,7 @@ export default class MainPage extends React.Component {
       score: this.state.score + (5 - this.state.falseAnswers),
     });
     this.colorList(+clickedId, true);
+    this.pauseSong();
     this.godAudioPlay();
   } else {
     this.setState({lastSelectAnswer: +clickedId,});
@@ -194,6 +199,7 @@ export default class MainPage extends React.Component {
           questionNumber={this.state.questionNumber}
         />
         <AudioPlayer
+          setAudioPlayerRef={this.setAudioPlayerRef}
           audioUrl={this.returnAudioUrl(
             this.state.questionNumber,
             this.state.trueAnswerNumber

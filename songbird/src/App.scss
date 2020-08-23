@@ -2,8 +2,12 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
-html {
+html, 
+body, #root, .App {
+    height: 100%;
 }
+
+
 
 .App {
   text-align: center;
@@ -55,6 +59,7 @@ html {
 ul {
   list-style: none;
   padding-inline-start: 0;
+  margin: 0;
 }
 
 .react-audio-player {
@@ -73,7 +78,7 @@ ul {
   justify-content: space-around;;
     flex-wrap: wrap;
     padding: 0;
-    margin-bottom: 25px;
+    margin: auto;
     border-radius: 5px;
     overflow: hidden;
 }
@@ -85,6 +90,7 @@ ul {
 
 .answer-list li {
   margin: 2px;
+  height: 100%;
 }
 
 .answer-list span {
@@ -104,7 +110,7 @@ ul {
 }
 
 body {
-  background-color: #f1f1ef;
+  background-color: #222;
   color: #ffffff;
   font-family: "Roboto", sans-serif;
 }
@@ -131,6 +137,18 @@ body {
 }
 
 .video-bg {
+  --widthA: 75vh;
+    width: calc(100% + var(--widthA));
   background-color: #222;
+}
+
+.navbar-text label {
+  margin: auto;
+}
+
+@media screen and (min-width: 1000px) {
+  .App {
+    background-color: transparent;
+  }
 }
 

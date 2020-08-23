@@ -17,7 +17,7 @@ const BirdPicture = (props) => {
 };
 
 const BirdName = (props) => {
-  if (props.secret) {
+  if (!props.secret) {
     return <h2>{props.name}</h2>;
   }
   return <h2>*********</h2>;
@@ -27,6 +27,7 @@ export default class AudioPlayer extends React.Component {
   constructor(props) {
     super(props);
     //console.log(props);
+    
     this.state = {};
   }
 
@@ -41,7 +42,7 @@ export default class AudioPlayer extends React.Component {
             </div>
             <div className="col-md-12 col-lg-6">
               <BirdName name={this.props.name} secret={this.props.showAnswer} />
-              <ReactAudioPlayer src={this.props.audioUrl} controls />
+              <ReactAudioPlayer src={this.props.audioUrl} ref={this.props.setAudioPlayerRef} controls autoPlay/>
             </div>
           </Row>
         </Container>

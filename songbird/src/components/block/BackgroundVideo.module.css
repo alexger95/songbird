@@ -1,11 +1,8 @@
 .Container {
-    /* position: absolute;
-    
-    height: 100vw;
-    width: 100vh; */
-
-    z-index: -1000;
-    position: fixed;
+  --widthA: 75vh;
+  width: calc(100% + var(--widthA));
+  z-index: -1000;
+  position: fixed;
   right: 0;
   bottom: 0;
   min-width: 100%;

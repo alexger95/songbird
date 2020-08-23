@@ -16,8 +16,10 @@ export default class BirdInfo extends React.Component {
   noBirdClicked() {
     return (
       <>
-        <div className="col-12 col-lg-6 bg-dark-light border-block">
+        <div className="col-12 col-lg-6">
+        <div className="bg-dark-light border-block"> 
           Выберите вариант ответа
+          </div>
         </div>
       </>
     );
@@ -26,9 +28,10 @@ export default class BirdInfo extends React.Component {
   birdClicked(id) {
     console.log(this.props);
     return (
-      <>
-        <div className="col-12 col-lg-6 bg-dark-light border-block">
-          <div className="row">
+      <>        
+        <div className="col-12 col-lg-6 ">
+        <div className="bg-dark-light border-block">
+        <div className="row">
             <div className="col-12 col-md-6">
               <div className="col-12">
                 <BirdPicture imageUrl={this.props.info[id - 1].image} />
@@ -45,9 +48,12 @@ export default class BirdInfo extends React.Component {
               </div>
             </div>
           </div>
-          <div className="row">
+        
+        <div className="row">
             <div className="col-sm">{this.props.info[id - 1].description}</div>
           </div>
+        </div>
+          
         </div>
       </>
     );
